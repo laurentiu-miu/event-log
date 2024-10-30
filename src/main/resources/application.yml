@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: event-log
+  cloud:
+    gcp:
+      pubsub:
+        emulator-host: 'localhost:8085'
+        project-id: my-test-project
+#  datasource:
+#    url: jdbc:postgresql://localhost:5432/event-log
+#    username: event-log-test
+#    password: 3v3ntl0gt3st
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.PostgreSQLDialect
+use:
+  emulator: true
+
+event:
+  provider:
+    google:
+      topic: myTestTopic
+      subscriptionInAll: myTestSubscriptionAll
+      subscriptionInFirst: myTestSubscription1
+      subscriptionInSecond: myTestSubscription2
+      subscriptionInThird: myTestSubscription3
