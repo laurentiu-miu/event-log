@@ -1,4 +1,4 @@
-package com.example.event_log.event;
+package com.example.event_log.event.config;
 
 import com.google.cloud.spring.pubsub.core.PubSubTemplate;
 import com.google.cloud.spring.pubsub.integration.inbound.PubSubInboundChannelAdapter;

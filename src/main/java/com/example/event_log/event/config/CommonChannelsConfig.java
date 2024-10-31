@@ -1,4 +1,4 @@
-package com.example.event_log.event;
+package com.example.event_log.event.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +17,10 @@ public class CommonChannelsConfig {
     }
     @Bean
     public MessageChannel pubsubInputChannel3() {
+        return new DirectChannel();
+    }
+    @Bean
+    public MessageChannel pubsubInputChannel4() {
         return new DirectChannel();
     }
 }

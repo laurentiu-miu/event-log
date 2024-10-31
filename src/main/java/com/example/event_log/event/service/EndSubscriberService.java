@@ -1,10 +1,8 @@
-package com.example.event_log.second;
+package com.example.event_log.event.service;
 
-import com.example.event_log.event.model.ErrorLog;
 import com.example.event_log.event.model.EventLog;
 import com.example.event_log.event.model.EventType;
-import com.example.event_log.event.repository.ErrorLogRepository;
-import com.example.event_log.event.service.GcpPublisher;
+import com.example.event_log.event.repository.EventLogRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.cloud.spring.pubsub.support.BasicAcknowledgeablePubsubMessage;
 import com.google.cloud.spring.pubsub.support.GcpPubSubHeaders;
@@ -16,45 +14,31 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.time.Instant;
-import java.util.Map;
 import java.util.UUID;
 
 @Service
 @AllArgsConstructor
 @Log4j2
-public class SecondSubscriberService {
-    private final GcpPublisher publisher;
+public class EndSubscriberService {
     private final ObjectMapper objectMapper;
-    private final EventSecondRepository repository;
-    private final ErrorLogRepository errorRepository;
+    private final EventLogRepository repository;
 
-    @ServiceActivator(inputChannel = "pubsubInputChannel2")
+    @ServiceActivator(inputChannel = "pubsubInputChannel4")
     public void messageReceiver1(String payload,
                                  @Header(GcpPubSubHeaders.ORIGINAL_MESSAGE) BasicAcknowledgeablePubsubMessage message,
                                  @Header("customType") String customType){
-        log.info("Process Second: {}", payload);
+        log.info("Process End: {}", payload);
         try {
             var currentEventLog = objectMapper.readValue(payload, EventLog.class);
             var newEventLog = EventLog.builder()
                     .mesUuid(UUID.randomUUID())
                     .trxUuid(currentEventLog.getTrxUuid())
-                    .eventType(EventType.SECOND)
+                    .eventType(EventType.END)
                     .logTime(Timestamp.from(Instant.now()))
                     .build();
-            repository.save(EventSecond.builder()
-                    .uuid(UUID.randomUUID())
-                    .eventJson(payload)
-                    .mesUuid(currentEventLog.getMesUuid())
-                    .build());
-            publisher.publish(newEventLog, Map.of("customType", newEventLog.getEventType().name()));
+            repository.save(newEventLog);
         } catch (Exception e) {
-            var exString = e.getMessage().length() <= 299 ? e.getMessage() : e.getMessage().substring(0, 299);
-            errorRepository.save(ErrorLog.builder()
-                    .uuid(UUID.randomUUID())
-                    .eventJson(payload)
-                    .exceptionLog(exString)
-                    .logTime(Timestamp.from(Instant.now()))
-                    .build());
+            log.error(e.getMessage());
         }
         message.ack();
     }

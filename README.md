@@ -22,15 +22,15 @@ curl -s -X PUT 'http://localhost:8085/v1/projects/my-test-project/subscriptions/
     
 curl -s -X PUT 'http://localhost:8085/v1/projects/my-test-project/subscriptions/myTestSubscription1' \
     -H 'content-type: application/json' \
-    --data '{"topic":"projects/my-test-project/topics/myTestTopic","filter":"attributes.customType=\"FIRST\""}'
+    --data '{"topic":"projects/my-test-project/topics/myTestTopic","filter":"attributes.customType=\"START\""}'
     
 curl -s -X PUT 'http://localhost:8085/v1/projects/my-test-project/subscriptions/myTestSubscription2' \
     -H 'content-type: application/json' \
-    --data '{"topic":"projects/my-test-project/topics/myTestTopic","filter":"attributes.customType=\"SECOND\""}'
+    --data '{"topic":"projects/my-test-project/topics/myTestTopic","filter":"attributes.customType=\"FIRST\""}'
     
 curl -s -X PUT 'http://localhost:8085/v1/projects/my-test-project/subscriptions/myTestSubscription3' \
     -H 'content-type: application/json' \
-    --data '{"topic":"projects/my-test-project/topics/myTestTopic","filter":"attributes.customType=\"THIRD\""}'
+    --data '{"topic":"projects/my-test-project/topics/myTestTopic","filter":"attributes.customType=\"SECOND\""}'
 ```
 ### Delete subscription
 ```shell

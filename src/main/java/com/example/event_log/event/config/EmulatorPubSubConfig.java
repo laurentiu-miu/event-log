@@ -1,4 +1,4 @@
-package com.example.event_log.event;
+package com.example.event_log.event.config;
 
 import com.google.cloud.spring.pubsub.core.PubSubTemplate;
 import com.google.cloud.spring.pubsub.integration.inbound.PubSubInboundChannelAdapter;
@@ -43,9 +43,10 @@ public class EmulatorPubSubConfig {
 
     public HeaderValueRouter router() {
         HeaderValueRouter router = new HeaderValueRouter("customType");
-        router.setChannelMapping("FIRST", "pubsubInputChannel1");
-        router.setChannelMapping("SECOND", "pubsubInputChannel2");
-        router.setChannelMapping("THIRD", "pubsubInputChannel3");
+        router.setChannelMapping("START", "pubsubInputChannel1");
+        router.setChannelMapping("FIRST", "pubsubInputChannel2");
+        router.setChannelMapping("SECOND", "pubsubInputChannel3");
+        router.setChannelMapping("THIRD", "pubsubInputChannel4");
         return router;
     }
 }
