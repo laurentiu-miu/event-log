@@ -36,3 +36,27 @@ curl -s -X PUT 'http://localhost:8085/v1/projects/my-test-project/subscriptions/
 ```shell
 curl -s -X DELETE 'http://localhost:8085/v1/projects/my-test-project/subscriptions/myTestSubscription1'
 ```
+
+
+### SQL Scripts
+
+```sql
+--events
+select count(*) from public.event_log
+--duplicates and errors
+select * from public.error_log
+--drop tables
+drop table public.databasechangelog;
+drop table public.databasechangeloglock;
+drop table public.event_log;
+drop table public.error_log;
+drop table public.tab_1;
+drop table public.tab_2;
+drop table public.tab_3;
+--clear data
+truncate public.event_log;
+truncate public.error_log;
+truncate public.tab_1;
+truncate public.tab_2;
+truncate public.tab_3;
+```

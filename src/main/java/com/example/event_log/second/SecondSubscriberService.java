@@ -43,7 +43,7 @@ public class SecondSubscriberService {
                     .build();
             repository.save(EventSecond.builder()
                     .uuid(UUID.randomUUID())
-                    .eventJson(payload)
+                    .eventJson(objectMapper.writeValueAsString(newEventLog))
                     .mesUuid(currentEventLog.getMesUuid())
                     .build());
             publisher.publish(newEventLog, Map.of("customType", newEventLog.getEventType().name()));

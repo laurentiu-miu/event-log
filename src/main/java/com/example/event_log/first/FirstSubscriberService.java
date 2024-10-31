@@ -33,7 +33,7 @@ public class FirstSubscriberService {
                                  @Header(GcpPubSubHeaders.ORIGINAL_MESSAGE) BasicAcknowledgeablePubsubMessage message,
                                  @Header("customType") String customType) throws InterruptedException {
         log.info("Process First: {}", payload);
-        Thread.sleep(10000);
+        //Thread.sleep(10000);
         try {
             var currentEventLog = objectMapper.readValue(payload, EventLog.class);
             var newEventLog = EventLog.builder()
@@ -44,7 +44,7 @@ public class FirstSubscriberService {
                     .build();
             repository.save(EventFirst.builder()
                     .uuid(UUID.randomUUID())
-                    .eventJson(payload)
+                    .eventJson(objectMapper.writeValueAsString(newEventLog))
                     .mesUuid(currentEventLog.getMesUuid())
                     .build());
             publisher.publish(newEventLog, Map.of("customType", newEventLog.getEventType().name()));

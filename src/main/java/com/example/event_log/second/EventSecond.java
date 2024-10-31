@@ -18,7 +18,7 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="TAB_1")
+@Table(name="TAB_2")
 public class EventSecond {
     @Id
     @Column(name = "uuid")
