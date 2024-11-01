@@ -2,7 +2,7 @@ spring:
   application:
     name: event-log
   liquibase:
-    enabled: false
+    enabled: true
   cloud:
     gcp:
       pubsub:

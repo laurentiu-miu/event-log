@@ -1,6 +1,7 @@
 package com.example.event_log.event.config;
 
 import com.google.cloud.spring.pubsub.core.PubSubTemplate;
+import com.google.cloud.spring.pubsub.integration.AckMode;
 import com.google.cloud.spring.pubsub.integration.inbound.PubSubInboundChannelAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,6 +31,7 @@ public class EmulatorPubSubConfig {
     public PubSubInboundChannelAdapter emulatorAdapter() {
         PubSubInboundChannelAdapter adapter = new PubSubInboundChannelAdapter(pubSubTemplate, subscriptionInAll);
         adapter.setOutputChannel(emulatorInputChannel());
+        adapter.setAckMode(AckMode.MANUAL);
         return adapter;
     }
 

@@ -1,6 +1,7 @@
 package com.example.event_log.event.config;
 
 import com.google.cloud.spring.pubsub.core.PubSubTemplate;
+import com.google.cloud.spring.pubsub.integration.AckMode;
 import com.google.cloud.spring.pubsub.integration.inbound.PubSubInboundChannelAdapter;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,6 +19,7 @@ public class ProductionPubSubConfig {
                                                     PubSubTemplate pubSubTemplate) {
         PubSubInboundChannelAdapter adapter = new PubSubInboundChannelAdapter(pubSubTemplate, subscription);
         adapter.setOutputChannel(inputChannel);
+        adapter.setAckMode(AckMode.MANUAL);
         return adapter;
     }
     @Bean
@@ -26,6 +28,7 @@ public class ProductionPubSubConfig {
                                                     PubSubTemplate pubSubTemplate) {
         PubSubInboundChannelAdapter adapter = new PubSubInboundChannelAdapter(pubSubTemplate, subscription);
         adapter.setOutputChannel(inputChannel);
+        adapter.setAckMode(AckMode.MANUAL);
         return adapter;
     }
     @Bean
@@ -34,6 +37,7 @@ public class ProductionPubSubConfig {
                                                     PubSubTemplate pubSubTemplate) {
         PubSubInboundChannelAdapter adapter = new PubSubInboundChannelAdapter(pubSubTemplate, subscription);
         adapter.setOutputChannel(inputChannel);
+        adapter.setAckMode(AckMode.MANUAL);
         return adapter;
     }
 
